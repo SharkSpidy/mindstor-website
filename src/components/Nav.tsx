@@ -47,11 +47,11 @@ export function Nav() {
             </a>
           ))}
           <a className="m-cta" href="#access">
-            Request Access
+            Enquire
           </a>
         </nav>
         <a className="btn btn-outline-grad nav-cta" href="#access">
-          Request Access
+          Enquire
         </a>
       </div>
     </header>

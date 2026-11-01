@@ -201,7 +201,7 @@ export function AccessSection() {
       <div className="wrap">
         <div className="access">
           <div className="copy">
-            <span className="eyebrow">Request access</span>
+            <span className="eyebrow">Enquire</span>
             <h2 id="access-title">Tell us what you are building.</h2>
             <p>
               Have a product idea, or one that needs fixing? Send a short note and we will tell you honestly what we
@@ -222,7 +222,7 @@ export function AccessSection() {
               <textarea id="f-brief" name="brief" required />
             </label>
             <button className="btn btn-primary" type="submit" disabled={status.kind === 'sending'}>
-              Request Access
+              Enquire
             </button>
             <p id="form-status" className={status.kind === 'error' ? 'err' : undefined} role="status" aria-live="polite">
               {status.message}
