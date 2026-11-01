@@ -1,4 +1,4 @@
-/* Layout: sticky nav, split hero (copy left, WebGL brain right), then Platform, Product, Core Values (bento grid), Careers, Access.
+/* Layout: sticky nav, split hero (copy left, WebGL brain right), then Platform, Product, Core Values (bento grid), Access.
      Single dark look by design: deep canvas with neon brand accents. */
   :root {
     --bg: #0a0512;
@@ -190,13 +190,6 @@
     .values { grid-template-columns: minmax(0, 1fr); }
     .v3 { grid-column: auto; }
   }
-
-  /* Careers */
-  .roles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 clamp(1.5rem, 4vw, 3.5rem); }
-  .role { padding-block: 1.3rem; border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: 0.35rem; }
-  .role h3 { font-size: 1.3rem; font-weight: 700; }
-  .role p { color: var(--ink-soft); }
-  @media (max-width: 48rem) { .roles { grid-template-columns: minmax(0, 1fr); } }
 
   /* Access */
   .access { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: clamp(1.5rem, 4vw, 3.5rem); border: 1px solid var(--line); border-radius: 28px; padding: clamp(1.5rem, 4vw, 3rem); background: var(--surface); }

@@ -9,7 +9,6 @@ export const NAV_LINKS: readonly NavLink[] = [
   { label: 'What We Make', href: '#make' },
   { label: 'Our Products', href: '#product' },
   { label: 'Core Values', href: '#values' },
-  { label: 'Careers', href: '#careers' },
 ];
 
 export interface MakeCard {
@@ -74,33 +73,5 @@ export const CORE_VALUES: readonly CoreValue[] = [
     num: '05',
     title: 'Better Every Release',
     text: 'We ship early, learn from real usage, and iterate quickly. Building better is a habit.',
-  },
-];
-
-export interface Role {
-  readonly title: string;
-  readonly text: string;
-}
-
-export const ROLES: readonly Role[] = [
-  {
-    title: 'Founders',
-    text: 'Set the direction, talk to clients and theatres, and work hands-on with the team.',
-  },
-  {
-    title: 'Lead SDE',
-    text: 'Owns the technical direction, shapes architecture, sets code quality standards, and helps engineers grow.',
-  },
-  {
-    title: 'SDE 2',
-    text: 'Takes features from idea to delivery, keeps code quality high, and works closely with the Lead SDE and Founders.',
-  },
-  {
-    title: 'SDE 1',
-    text: 'Builds and ships features, writes clean and documented code, fixes issues, and levels up by learning from senior engineers.',
-  },
-  {
-    title: 'Data Analyst',
-    text: 'Builds dashboards and turns product and business data into plain-language insights for the Founders.',
   },
 ];

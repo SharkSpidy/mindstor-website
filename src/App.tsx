@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { Hero } from './components/Hero';
 import { LogoLoader } from './components/LogoLoader';
 import { Nav } from './components/Nav';
-import { AccessSection, CareersSection, Footer, MakeSection, ProductSection, ValuesSection } from './components/Sections';
+import { AccessSection, Footer, MakeSection, ProductSection, ValuesSection } from './components/Sections';
 import { readFlag, writeFlag } from './lib/storage';
 
 const SEEN_KEY = 'mindstor:loader-seen';
@@ -50,7 +50,6 @@ export default function App() {
           <MakeSection />
           <ProductSection />
           <ValuesSection />
-          <CareersSection />
           <AccessSection />
         </main>
         <Footer />

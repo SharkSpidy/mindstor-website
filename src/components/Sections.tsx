@@ -1,5 +1,5 @@
 import { CSSProperties, FormEvent, useState } from 'react';
-import { CORE_VALUES, MAKE_CARDS, ROLES } from '../data/content';
+import { CORE_VALUES, MAKE_CARDS } from '../data/content';
 import { LOGO, LOGO_VIEWBOX } from '../data/logo';
 import { validateAccessForm } from '../lib/validate';
 
@@ -149,32 +149,7 @@ export function ValuesSection() {
   );
 }
 
-export function CareersSection() {
-  return (
-    <section className="section" id="careers" aria-labelledby="careers-title" style={{ paddingTop: 0 }}>
-      <div className="wrap">
-        <div className="section-head">
-          <span className="eyebrow">Careers</span>
-          <h2 id="careers-title">Roles at Mindstor AI</h2>
-          <p>
-            We hire for what you can do and how you learn. We talk openly, keep each other updated, and write code
-            anyone on the team can pick up.
-          </p>
-        </div>
-        <div className="roles">
-          {ROLES.map((r) => (
-            <div className="role" key={r.title}>
-              <h3>{r.title}</h3>
-              <p>{r.text}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/** POST target for the access form. Empty means "not connected yet" and the UI says so. */
+/** Formspree endpoint for the access form. Empty means "not connected yet". */
 const FORM_ENDPOINT: string = import.meta.env.VITE_FORM_ENDPOINT ?? '';
 
 type Status = { kind: 'idle' | 'sending' | 'ok' | 'error'; message: string };
@@ -207,7 +182,10 @@ export function AccessSection() {
     try {
       const res = await fetch(FORM_ENDPOINT, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify(values),
       });
       if (!res.ok) throw new Error(String(res.status));

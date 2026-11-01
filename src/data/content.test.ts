@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { CORE_VALUES, MAKE_CARDS, NAV_LINKS, ROLES } from './content';
+import { CORE_VALUES, MAKE_CARDS, NAV_LINKS } from './content';
 import { LOGO } from './logo';
 
 describe('content integrity', () => {
@@ -12,12 +12,16 @@ describe('content integrity', () => {
   });
 
   it('has no leftover chip / embedded positioning', () => {
-    const all = JSON.stringify([CORE_VALUES, MAKE_CARDS, ROLES, NAV_LINKS]).toLowerCase();
+    const all = JSON.stringify([CORE_VALUES, MAKE_CARDS, NAV_LINKS]).toLowerCase();
     expect(all).not.toMatch(/chip|embedded|firmware/);
   });
 
   it('points every nav link at an in-page anchor', () => {
     for (const l of NAV_LINKS) expect(l.href).toMatch(/^#[a-z]+$/);
+  });
+
+  it('does not include a careers link', () => {
+    expect(NAV_LINKS.some((link) => link.href === '#careers')).toBe(false);
   });
 });
 
