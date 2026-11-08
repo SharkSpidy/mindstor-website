@@ -7,7 +7,7 @@ export interface NavLink {
 
 export const NAV_LINKS: readonly NavLink[] = [
   { label: 'What We Make', href: '#make' },
-  { label: 'Our Products', href: '#product' },
+  // { label: 'Our Products', href: '#product' },
   { label: 'Core Values', href: '#values' },
 ];
 

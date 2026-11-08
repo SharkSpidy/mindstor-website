@@ -1,6 +1,5 @@
 import { CSSProperties, FormEvent, useState } from 'react';
 import { CORE_VALUES, MAKE_CARDS } from '../data/content';
-import { LOGO, LOGO_VIEWBOX } from '../data/logo';
 import { validateAccessForm } from '../lib/validate';
 
 export function MakeSection() {
@@ -32,7 +31,7 @@ export function MakeSection() {
   );
 }
 
-/** Cinema-ticket illustration for our first product. */
+/*
 function Ticket() {
   return (
     <svg className="ticket" viewBox="0 0 320 180" role="img" aria-label="Illustration of a cinema ticket">
@@ -98,6 +97,7 @@ export function ProductSection() {
     </section>
   );
 }
+*/
 
 const STACK_ICON = (
   <svg viewBox="0 0 280 110" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
