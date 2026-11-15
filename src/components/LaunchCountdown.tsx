@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { getTimeLeft, LAUNCH_AT, pad2 } from '../lib/countdown';
 import { prefersReducedMotion } from '../lib/storage';
 import '../styles/launch.css';
@@ -27,6 +27,37 @@ function useScramble(length: number, still: boolean): string {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [length, still]);
   return text;
+}
+
+
+/** One split-flap digit: the old top half folds down, revealing the new digit beneath it. */
+function FlipDigit({ value }: { value: string }) {
+  const [cur, setCur] = useState(value);
+  const [prev, setPrev] = useState(value);
+  const [flips, setFlips] = useState(0);
+  const last = useRef(value);
+
+  useEffect(() => {
+    if (value === last.current) return;
+    setPrev(last.current);
+    setCur(value);
+    setFlips((n) => n + 1);
+    last.current = value;
+  }, [value]);
+
+  const flipping = flips > 0 && prev !== cur;
+  return (
+    <span className="flip" aria-hidden="true">
+      <span className="half top"><b>{cur}</b></span>
+      <span className="half bottom"><b>{prev}</b></span>
+      {flipping && (
+        <>
+          <span className="half top flap" key={`t${flips}`}><b>{prev}</b></span>
+          <span className="half bottom flap" key={`b${flips}`} onAnimationEnd={() => setPrev(cur)}><b>{cur}</b></span>
+        </>
+      )}
+    </span>
+  );
 }
 
 export function LaunchCountdown() {
@@ -73,11 +104,13 @@ export function LaunchCountdown() {
 
       <div className="launch-clock" role="timer" aria-label={label}>
         {UNITS.map((unit, i) => (
-          <div className={`tile tile-${unit}`} key={unit}>
-            <span className="tile-num" key={values[i]} aria-hidden="true">
-              {pad2(values[i])}
-            </span>
-            <span className="tile-unit">{unit}</span>
+          <div className={`unit unit-${unit}`} key={unit}>
+            <div className="digits">
+              {pad2(values[i]).split('').map((d, k) => (
+                <FlipDigit value={d} key={k} />
+              ))}
+            </div>
+            <span className="unit-label">{unit}</span>
           </div>
         ))}
       </div>
