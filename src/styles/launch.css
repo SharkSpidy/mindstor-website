@@ -49,7 +49,6 @@
 
 .launch-meta { margin-top: 0.85rem; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.3rem 1rem; font-size: 0.8rem; color: var(--ink-soft); }
 .codename { font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; letter-spacing: 0.08em; color: var(--ink); text-shadow: 0 0 10px rgba(225, 45, 155, 0.6); white-space: pre; }
-.launch-when { font-weight: 500; }
 .launch.is-live .tile-num { background: none; color: var(--ink); }
 
 @keyframes tile-flip { from { opacity: 0; transform: translateY(-45%) scaleY(0.6); } to { opacity: 1; transform: none; } }

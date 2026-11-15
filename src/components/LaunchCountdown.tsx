@@ -86,9 +86,6 @@ export function LaunchCountdown() {
         <span className="codename" aria-hidden="true">
           Project {codename}
         </span>
-        <span className="launch-when">
-          {left.done ? 'Launched 1 Jan 2027' : 'Drops 1 Jan 2027 · 00:00 IST'}
-        </span>
       </p>
     </aside>
   );
