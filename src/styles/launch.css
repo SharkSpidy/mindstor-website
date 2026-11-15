@@ -1,0 +1,111 @@
+/* ---------- Product-launch teaser: countdown + floating shapes ----------
+   Purely additive: everything here is namespaced (.launch*, .fx*) and reuses the site's tokens. */
+
+/* ===== Countdown card (sits at the top of the hero copy) ===== */
+.launch {
+  position: relative; margin-bottom: clamp(1.4rem, 3vw, 2.2rem);
+  padding: 1.1rem 1.2rem 1rem; max-width: 33rem;
+  border-radius: 24px; border: 1px solid transparent;
+  background:
+    linear-gradient(160deg, rgba(20, 8, 32, 0.92), rgba(10, 5, 18, 0.92)) padding-box,
+    var(--grad) border-box;
+  box-shadow: 0 0 44px rgba(225, 45, 155, 0.22), inset 0 0 40px rgba(173, 50, 192, 0.08);
+  isolation: isolate;
+}
+.launch::before {
+  content: ""; position: absolute; inset: -1px; border-radius: inherit; z-index: -1; pointer-events: none;
+  background: radial-gradient(circle at 12% 0%, rgba(255, 71, 112, 0.28), transparent 55%);
+  animation: launch-breathe 4.5s ease-in-out infinite;
+}
+.launch-badge {
+  display: inline-flex; align-items: center; gap: 0.55rem;
+  font-family: var(--font-display); font-weight: 600; font-size: 0.75rem;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--bright);
+}
+.launch-pulse { position: relative; width: 0.6rem; height: 0.6rem; border-radius: 50%; background: var(--bright); box-shadow: 0 0 12px var(--bright); }
+.launch-pulse::after { content: ""; position: absolute; inset: 0; border-radius: 50%; border: 2px solid var(--bright); animation: launch-ping 1.8s ease-out infinite; }
+
+.launch-teaser { position: relative; display: grid; margin-top: 0.45rem; min-height: 1.7em; font-family: var(--font-display); font-weight: 700; font-size: clamp(1.1rem, 2vw, 1.4rem); line-height: 1.25; }
+.teaser-line { grid-area: 1 / 1; opacity: 0; transform: translateY(0.5em); filter: blur(6px); transition: opacity 0.7s ease, transform 0.7s ease, filter 0.7s ease; }
+.teaser-line.on { opacity: 1; transform: none; filter: none; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+.launch-clock { margin-top: 0.8rem; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(0.4rem, 1.4vw, 0.7rem); }
+.tile {
+  position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center;
+  padding: 0.65rem 0.2rem 0.5rem; border-radius: 16px;
+  border: 1px solid var(--line); background: var(--surface);
+}
+.tile::after { /* the faint "split-flap" seam */
+  content: ""; position: absolute; left: 0; right: 0; top: 46%; height: 1px; background: rgba(255, 255, 255, 0.08); pointer-events: none;
+}
+.tile-num {
+  font-family: var(--font-display); font-weight: 700; font-size: clamp(1.9rem, 5vw, 2.9rem); line-height: 1;
+  font-variant-numeric: tabular-nums; letter-spacing: 0.01em;
+  background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: tile-flip 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.tile-unit { margin-top: 0.4rem; font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-soft); font-family: var(--font-display); font-weight: 600; }
+.tile-seconds { border-color: rgba(255, 71, 112, 0.45); box-shadow: 0 0 22px rgba(255, 71, 112, 0.22); }
+
+.launch-meta { margin-top: 0.85rem; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.3rem 1rem; font-size: 0.8rem; color: var(--ink-soft); }
+.codename { font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; letter-spacing: 0.08em; color: var(--ink); text-shadow: 0 0 10px rgba(225, 45, 155, 0.6); white-space: pre; }
+.launch-when { font-weight: 500; }
+.launch.is-live .tile-num { background: none; color: var(--ink); }
+
+@keyframes tile-flip { from { opacity: 0; transform: translateY(-45%) scaleY(0.6); } to { opacity: 1; transform: none; } }
+@keyframes launch-ping { from { transform: scale(1); opacity: 0.9; } to { transform: scale(2.8); opacity: 0; } }
+@keyframes launch-breathe { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
+
+@media (max-width: 52rem) { .launch { margin-inline: auto; max-width: 26rem; } }
+@media (max-width: 26rem) { .launch { padding: 0.9rem 0.8rem; } .tile-unit { letter-spacing: 0.1em; font-size: 0.6rem; } }
+
+/* ===== Floating shapes ===== */
+.fx-layer { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; --sy: 0; }
+.fx {
+  position: absolute; display: block; opacity: 0.55;
+  transform: translate3d(0, calc(var(--sy) * var(--depth) * -1px), 0);
+  will-change: transform;
+}
+.fx-inner { display: block; width: 100%; height: 100%; animation: var(--dur) linear var(--delay) infinite; filter: drop-shadow(0 0 10px currentColor); }
+.fx-inner svg { display: block; }
+
+.fx-spin .fx-inner { animation-name: fx-spin; }
+.fx-bob .fx-inner { animation-name: fx-bob; animation-timing-function: ease-in-out; }
+.fx-fidget .fx-inner { animation-name: fx-fidget; animation-timing-function: ease-in-out; }
+.fx-twitch .fx-inner { animation-name: fx-twitch; animation-timing-function: steps(1, end); }
+.fx-orbit-path .fx-inner { animation-name: fx-orbit; }
+
+@keyframes fx-spin { to { transform: rotate(360deg); } }
+@keyframes fx-bob { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(14px, -22px) scale(1.08); } }
+/* Idle, then a quick nervous wiggle: the "fidget". */
+@keyframes fx-fidget {
+  0%, 55%, 100% { transform: rotate(0) scale(1); }
+  62% { transform: rotate(-24deg) scale(1.15); }
+  70% { transform: rotate(18deg) scale(0.95); }
+  78% { transform: rotate(-10deg) scale(1.05); }
+  86% { transform: rotate(0) scale(1); }
+}
+@keyframes fx-twitch {
+  0%, 100% { transform: translate(0, 0) rotate(0); }
+  18% { transform: translate(3px, -4px) rotate(14deg); }
+  22% { transform: translate(-3px, 2px) rotate(-8deg); }
+  26% { transform: translate(0, 0) rotate(0); }
+  64% { transform: translate(-4px, 3px) rotate(45deg); }
+  68% { transform: translate(2px, -2px) rotate(90deg); }
+  72% { transform: translate(0, 0) rotate(90deg); }
+}
+/* A dot that travels a wide circle around its anchor. */
+@keyframes fx-orbit {
+  from { transform: rotate(0) translateX(2.6rem) rotate(0); }
+  to { transform: rotate(360deg) translateX(2.6rem) rotate(-360deg); }
+}
+
+@media (max-width: 43.75rem) { .fx-min700, .fx-min900 { display: none; } .fx { opacity: 0.4; } }
+@media (max-width: 56.25rem) { .fx-min900 { display: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-inner, .tile-num, .launch::before, .launch-pulse::after { animation: none; }
+  .fx { transform: none; }
+  .teaser-line { transition: none; }
+  .teaser-line:first-child { opacity: 1; transform: none; filter: none; }
+}

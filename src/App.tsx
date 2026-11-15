@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { FloatingFX } from './components/FloatingFX';
 import { Hero } from './components/Hero';
 import { LogoLoader } from './components/LogoLoader';
 import { Nav } from './components/Nav';
@@ -116,6 +117,7 @@ export default function App() {
   return (
     <>
       {loading && <LogoLoader onDone={handleDone} />}
+      <FloatingFX />
       <div ref={siteRef} aria-hidden={loading || undefined}>
         <Nav />
         <main id="top">

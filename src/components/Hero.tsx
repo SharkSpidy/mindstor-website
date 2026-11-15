@@ -1,10 +1,12 @@
 import { Hero3D } from './Hero3D';
+import { LaunchCountdown } from './LaunchCountdown';
 
 export function Hero() {
   return (
     <section className="hero" aria-labelledby="hero-title">
       <div className="wrap hero-grid">
         <div>
+          <LaunchCountdown />
           <h1 id="hero-title">
             <span className="line">We build the products</span>
             <span className="line">people actually use.</span>
