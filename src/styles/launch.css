@@ -3,7 +3,7 @@
 
 /* ===== Countdown card (sits at the top of the hero copy) ===== */
 .launch {
-  position: relative; margin-bottom: clamp(1.4rem, 3vw, 2.2rem);
+  position: relative; container-type: inline-size; margin-bottom: clamp(1.4rem, 3vw, 2.2rem);
   padding: 1.1rem 1.2rem 1rem; max-width: 33rem;
   border-radius: 24px; border: 1px solid transparent;
   background:
@@ -35,7 +35,6 @@
   --dg: 0.2rem;
   --dw: calc(((100cqw - 3 * var(--g)) / 4 - var(--dg)) / 2);
   --dh: calc(var(--dw) * 1.38);
-  container-type: inline-size;
   margin-top: 0.9rem; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--g);
 }
 .unit { position: relative; display: flex; flex-direction: column; align-items: center; }
